@@ -7,3 +7,4 @@ out
 .env.production
 .idea
 .vscode
+yarn.lock

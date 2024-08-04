@@ -24,11 +24,7 @@
     "dotenv": "^16.4.5",
     "electron-updater": "^6.1.7",
     "http": "^0.0.1-security",
-    "md5": "^2.3.0",
-    "path": "^0.12.7",
-    "pg": "^8.12.0",
-    "redis": "^2.8.0",
-    "sha256": "^0.2.0"
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config": "^1.0.2",
