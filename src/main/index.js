@@ -2,11 +2,17 @@ import { app, shell, BrowserWindow, ipcMain } from "electron";
 import { join } from "path";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import icon from "../../resources/icon.png?asset";
-import { setupIpcMainHandlers } from "../ipc/ipcHandler";
+import { setupIpcMainHandlers } from "../ipcHandlers/setupIpcMainHandlers";
+
+// set global eventEmitter
+const EventEmitter = require("events");
+global.eventEmitter = new EventEmitter();
+
+let mainWindow;
 
 function createWindow() {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 900,
     height: 670,
     show: false,
@@ -56,6 +62,8 @@ app.whenReady().then(() => {
 
 
   createWindow();
+  // set global mainWindow
+  global.mainWindow = mainWindow;
   setupIpcMainHandlers();
   app.on("activate", function() {
     // On macOS it's common to re-create a window in the app when the

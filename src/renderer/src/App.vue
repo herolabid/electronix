@@ -1,34 +1,23 @@
 <script setup>
-import Versions from "./components/Versions.vue";
-import { onMounted } from "vue";
+const { ipcRenderer } = require("electron");
 
-
-const sendMessage = () => {
-  window.api.getInfo();
-};
-
-onMounted(() => {
-   window.api.getInfo();
-})
-
-window.api.getResponse((resp) => {
-  console.log({ resp });
+// Mendengarkan balasan dari pesan asinkron
+ipcRenderer.on("reply-ping", (event, arg) => {
+  console.log(arg); // Mencetak 'pong'
 });
-// const ipcHandle = () => window.electron.ipcRenderer.send("ping");
+
+ipcRenderer.on("global-event-response", (event, data) => {
+  console.log(`Received global event with data:`, data);
+});
+
+
+// window.electron.ipcRenderer.send("ping");
+const ipcHandle = () => ipcRenderer.send("ping", "ping");
 </script>
 
 <template>
   <div class="w-full ">
-
-      <div class="mx-auto flex">
-        <div class="grid-cols-2">
-          dasda
-        </div>
-        <div  class="grid-cols-2">
-          dasda
-        </div>
-      </div>
-
+    Welcome to Electronix
+    <button class="px-4 py-2" @click="ipcHandle">Ping</button>
   </div>
-
 </template>

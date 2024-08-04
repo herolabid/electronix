@@ -1,12 +1,8 @@
-import { contextBridge, ipcRenderer } from "electron";
+import { contextBridge} from "electron";
 import { electronAPI } from "@electron-toolkit/preload";
 
 // Custom APIs for renderer
 const api = {
-  getInfo: () => ipcRenderer.send('get-info'),
-  replayGetInfo: (callback) => ipcRenderer.on('replay-get-info', (event, response) => callback(response)),
-  sendExampleMessage: (data) => ipcRenderer.send("example-message", data),
-  getResponse: (callback) => ipcRenderer.on("response", (event, response) => callback(response))
 };
 
 // Use `contextBridge` APIs to expose Electron APIs to
